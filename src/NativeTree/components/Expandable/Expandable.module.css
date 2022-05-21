@@ -1,0 +1,12 @@
+.main > .main {
+  margin-left: 10px;
+}
+
+.label {
+  cursor: pointer;
+}
+
+.content {
+  margin-left: 20px;
+}
+
