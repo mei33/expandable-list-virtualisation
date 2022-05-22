@@ -1,0 +1,13 @@
+.main {
+  min-height: var(--blockHeight, 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.list {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}

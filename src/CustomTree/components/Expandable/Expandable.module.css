@@ -1,0 +1,27 @@
+.main > .main {
+  margin-left: 10px;
+}
+
+.label {
+  padding-left: 0;
+  padding-right: 0;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+}
+
+.label::before {
+  margin-right: 5px;
+  width: 15px;
+  display: inline-block;
+  content: "→";
+}
+
+.label.isExpanded::before {
+  content: "↓";
+}
+
+.content {
+  margin-left: 20px;
+}

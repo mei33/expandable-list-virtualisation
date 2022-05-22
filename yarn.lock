@@ -1178,6 +1178,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@faker-js/faker@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-7.0.1.tgz#6afdcd3f1000ad0382dda440f1746b5f0c43f832"
+  integrity sha512-d7liuZh+aSPJ7JsWQ/Mu59HQDhYjWk7EPiVGMTL7KUEyrzYdKuMVfD3R0eCW8MezS20n4LoX/9zBfIV9zWdTrA==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.5.tgz#2cbaf9a89460da24b5ca6531b8bbfc23e1df50c7"
