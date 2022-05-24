@@ -1,24 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+
+import { CustomTree } from './CustomTree';
+import { NativeTree } from './NativeTree';
+import { getMockData } from './utils/getMockData';
+// import { mockItems } from './CustomTree/__tests__/mock';
+
 import './App.css';
 
 function App() {
+  const [treeKind, setTreeKind] = React.useState<'custom' | 'native'>('custom');
+
+  const handleSwitchTree = () => {
+    const treeKindUpdated = treeKind === 'custom' ? 'native' : 'custom';
+
+    setTreeKind(treeKindUpdated);
+  };
+
+  const mockData = React.useMemo(() => getMockData(1000), []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button
+        onClick={handleSwitchTree}
+        style={{ position: 'fixed', top: 50, right: 50 }}
+      >
+        сменить вид дерева
+      </button>
+      {treeKind === 'custom' ? (
+        <CustomTree items={mockData} />
+      ) : (
+        <NativeTree items={mockData} />
+      )}
     </div>
   );
 }
