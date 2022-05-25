@@ -1,0 +1,19 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { getMockData } from '../utils/getMockData';
+import { NativeTree } from './NativeTree';
+
+<Meta
+  title="NativeTree"
+  component={NativeTree}
+  argTypes={{ onToggle: { action: 'clicked' } }}
+/>
+
+export const Template = (args) => <NativeTree {...args} />;
+
+<Story
+  name="Main"
+  args={{
+    items: getMockData(100),
+  }}>
+  {Template.bind({})}
+</Story>

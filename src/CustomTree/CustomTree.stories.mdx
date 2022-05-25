@@ -1,0 +1,19 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { getMockData } from '../utils/getMockData';
+import { CustomTree } from './CustomTree';
+
+<Meta
+  title="CustomTree"
+  component={CustomTree}
+  argTypes={{ onToggle: { action: 'clicked' } }}
+/>
+
+export const Template = (args) => <CustomTree {...args} />;
+
+<Story
+  name="Main"
+  args={{
+    items: getMockData(1000),
+  }}>
+  {Template.bind({})}
+</Story>
