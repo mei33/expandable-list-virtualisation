@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import { NativeTree } from '../NativeTree';
-import { mockItems } from './mock';
+import { mockItems } from '../../mocks/mock';
 
 describe('NativeTree', () => {
   it('показывает полный список', () => {

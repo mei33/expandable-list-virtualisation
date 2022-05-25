@@ -27,6 +27,10 @@ export const NativeTree: React.FC<Props> = ({
     onToggle && onToggle(id);
   };
 
+  if (!items.length) {
+    return null
+  }
+
   const renderTreeContent = ({
     items,
     branchLabel,

@@ -2,11 +2,9 @@ import React from 'react';
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CustomTree } from '../CustomTree';
-import { mockItems } from './mock';
+import { mockItems } from '../../mocks/mock';
 
 describe('CustomTree', () => {
-  const intersectionObserver = window.IntersectionObserver;
-
   const observeMock = jest.fn();
 
   class IntersectionObserverMock {
@@ -16,23 +14,21 @@ describe('CustomTree', () => {
   }
 
   beforeAll(() => {
-    Object.defineProperties(window, {
-      IntersectionObserver: {
-        value: IntersectionObserverMock,
-      },
-    });
+    Object.defineProperty(window, 'IntersectionObserver', {
+      writable: true,
+      configurable: true,
+      value: IntersectionObserverMock,
+    })
+    
+    Object.defineProperty(global, 'IntersectionObserver', {
+      writable: true,
+      configurable: true,
+      value: IntersectionObserverMock,
+    })
   });
 
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  afterAll(() => {
-    Object.defineProperties(window, {
-      IntersectionObserver: {
-        value: intersectionObserver,
-      },
-    });
   });
 
   it('показывает полный список в полном режиме', () => {
