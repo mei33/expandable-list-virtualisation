@@ -3,7 +3,7 @@ import React from 'react';
 import { CustomTree } from './CustomTree';
 import { NativeTree } from './NativeTree';
 import { getMockData } from './utils/getMockData';
-// import { mockItems } from './CustomTree/__tests__/mock';
+import { mockItems } from './mocks/mock';
 
 import './App.css';
 
