@@ -146,7 +146,6 @@ describe('CustomTree', () => {
 
   it('принимает переданные CSS-классы для короткого списка', () => {
     const className = 'some-class';
-    // todo: возможно протестить это же для каждого из компонентов
     const { container } = render(
       <CustomTree items={mockItems.slice(0, 114)} className={className} />
     );

@@ -66,7 +66,6 @@ describe('NativeTree', () => {
 
   it('принимает переданные CSS-классы', () => {
     const className = 'some-class';
-    // todo: возможно протестить это же для каждого из компонентов
     const { container } = render(
       <NativeTree items={mockItems} className={className} />
     );
