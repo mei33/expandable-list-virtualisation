@@ -160,6 +160,7 @@ export const ObservableTree: React.FC<Props> = ({
       style={
         {
           '--blockHeight': `${INITIAL_BLOCK_HEIGHT}px`,
+          '--visibleAreaHeight': `${height}px`,
         } as React.CSSProperties
       }
     >

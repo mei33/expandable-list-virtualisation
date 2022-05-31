@@ -1,8 +1,9 @@
 .main {
-  min-height: var(--blockHeight, 20px);
+  max-height: var(--visibleAreaHeight);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  overflow-y: scroll;
 }
 
 .list {
