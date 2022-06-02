@@ -25,7 +25,7 @@ export interface CommonTreeProps {
   onToggle?: Props['onToggle'];
 }
 
-export const SCREENS_TO_RENDER = 3;
+export const SCREENS_TO_RENDER = 4;
 export const INITIAL_BLOCK_HEIGHT = 20;
 
 export const CustomTree: React.FC<Props> = ({

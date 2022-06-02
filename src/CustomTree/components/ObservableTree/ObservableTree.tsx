@@ -37,7 +37,7 @@ export const ObservableTree: React.FC<Props> = ({
     bottom: number | null;
   }>({
     top: null,
-    bottom: itemsOnScreen * (SCREENS_TO_RENDER - 1),
+    bottom: itemsOnScreen * (SCREENS_TO_RENDER - 2) + 1,
   });
 
   const idOfObservable = React.useRef<{

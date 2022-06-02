@@ -36,46 +36,65 @@ export const useObservable = ({
   itemsAmountToRender,
   setItemsToRender,
 }: Params) => {
+  const itemsBeforeTopObservable = itemsOnScreen * 2;
+
   // движение вниз
   React.useLayoutEffect(() => {
-    observerRefBottom.current = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (!indexOfObservable.current.bottom) {
-            return;
+    observerRefBottom.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!indexOfObservable.current.bottom) {
+              return;
+            }
+
+            const indexOfObservableBottomUpdated =
+              indexOfObservable.current.bottom + itemsOnScreen;
+
+            if (indexOfObservableBottomUpdated > items.length) {
+              if (observableElement.current.bottom) {
+                observerRefTop.current?.unobserve(
+                  observableElement.current.bottom
+                );
+              }
+              return;
+            }
+
+            const idOfObservableBottomUpdated =
+              items[indexOfObservableBottomUpdated].id;
+
+            const indexOfObservableTopUpdated =
+              indexOfObservable.current.bottom - itemsOnScreen;
+
+            if (
+              indexOfObservableTopUpdated &&
+              indexOfObservableTopUpdated > itemsBeforeTopObservable
+            ) {
+              idOfObservable.current.top =
+                items[indexOfObservableTopUpdated].id;
+              indexOfObservable.current.top = indexOfObservableTopUpdated;
+            }
+
+            idOfObservable.current.bottom = idOfObservableBottomUpdated;
+            indexOfObservable.current.bottom = indexOfObservableBottomUpdated;
+
+            const startIndexToRender =
+              indexOfObservable.current.top &&
+              indexOfObservable.current.top >= itemsBeforeTopObservable
+                ? indexOfObservable.current.top - itemsBeforeTopObservable
+                : 0;
+
+            setItemsToRender(
+              items.slice(
+                startIndexToRender,
+                startIndexToRender + itemsAmountToRender + itemsOnScreen
+              )
+            );
           }
-
-          const indexOfObservableBottomUpdated =
-            indexOfObservable.current.bottom + itemsOnScreen;
-
-          if (indexOfObservableBottomUpdated > items.length) {
-            return;
-          }
-
-          const idOfObservableBottomUpdated =
-            items[indexOfObservableBottomUpdated].id;
-
-          const indexOfObservableTopUpdated =
-            indexOfObservable.current.bottom - itemsOnScreen;
-
-          idOfObservable.current.top = items[indexOfObservableTopUpdated].id;
-          idOfObservable.current.bottom = idOfObservableBottomUpdated;
-
-          const startIndexToRender =
-            indexOfObservable.current.bottom - itemsOnScreen;
-
-          setItemsToRender(
-            items.slice(
-              startIndexToRender,
-              startIndexToRender + itemsAmountToRender
-            )
-          );
-
-          indexOfObservable.current.top = indexOfObservableTopUpdated;
-          indexOfObservable.current.bottom = indexOfObservableBottomUpdated;
-        }
-      });
-    });
+        });
+      },
+      { threshold: 1.0 }
+    );
 
     if (!observableElement.current.bottom) {
       return;
@@ -100,47 +119,58 @@ export const useObservable = ({
 
   // движение вверх
   React.useLayoutEffect(() => {
-    observerRefTop.current = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (!indexOfObservable.current.top) {
-            return;
+    observerRefTop.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!indexOfObservable.current.top) {
+              return;
+            }
+
+            const indexOfObservableTopUpdated =
+              indexOfObservable.current.top - itemsOnScreen - 1;
+
+            const idOfObservableTopUpdated =
+              indexOfObservableTopUpdated > itemsOnScreen
+                ? items[indexOfObservableTopUpdated].id
+                : null;
+
+            const indexOfObservableBottomUpdated =
+              indexOfObservable.current.top + itemsOnScreen;
+
+            idOfObservable.current.bottom =
+              items[indexOfObservableBottomUpdated].id;
+            indexOfObservable.current.bottom = indexOfObservableBottomUpdated;
+
+            idOfObservable.current.top = idOfObservableTopUpdated;
+            indexOfObservable.current.top =
+              indexOfObservableTopUpdated > itemsOnScreen
+                ? indexOfObservableTopUpdated
+                : null;
+
+            if (
+              !indexOfObservable.current.top &&
+              observableElement.current.top
+            ) {
+              observerRefTop.current?.unobserve(observableElement.current.top);
+            }
+
+            const startIndexToRender =
+              indexOfObservableTopUpdated >= itemsOnScreen
+                ? indexOfObservableTopUpdated - itemsOnScreen
+                : 0;
+
+            setItemsToRender(
+              items.slice(
+                startIndexToRender,
+                startIndexToRender + itemsAmountToRender
+              )
+            );
           }
-
-          const indexOfObservableTopUpdated =
-            indexOfObservable.current.top - itemsOnScreen;
-
-          const idOfObservableTopUpdated =
-            indexOfObservableTopUpdated > 0
-              ? items[indexOfObservableTopUpdated].id
-              : null;
-
-          const indexOfObservableBottomUpdated =
-            indexOfObservable.current.top + itemsOnScreen;
-
-          idOfObservable.current.bottom =
-            items[indexOfObservableBottomUpdated].id;
-          idOfObservable.current.top = idOfObservableTopUpdated;
-
-          const endIndexToRender =
-            indexOfObservable.current.top +
-            itemsOnScreen * (screensToRender - 1);
-
-          setItemsToRender(
-            items.slice(
-              endIndexToRender - itemsAmountToRender,
-              endIndexToRender
-            )
-          );
-
-          indexOfObservable.current.bottom = indexOfObservableBottomUpdated;
-          indexOfObservable.current.top =
-            indexOfObservableTopUpdated > 0
-              ? indexOfObservableTopUpdated
-              : null;
-        }
-      });
-    });
+        });
+      },
+      { threshold: 1.0 }
+    );
 
     if (!observableElement.current.top) {
       return;
