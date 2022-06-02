@@ -12,3 +12,7 @@
   padding-left: 0;
   list-style: none;
 }
+
+.listItem {
+  min-height: var(--blockHeight);
+}

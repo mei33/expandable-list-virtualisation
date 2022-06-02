@@ -128,7 +128,12 @@ export const ObservableTree: React.FC<Props> = ({
     return items.map(({ id, label, children }) => {
       if (children.length) {
         return (
-          <div ref={observableNodeSetter} key={id} data-id={id}>
+          <div
+            ref={observableNodeSetter}
+            key={id}
+            data-id={id}
+            className={styles.listItem}
+          >
             <Expandable
               id={id}
               isExpanded={id in expandedStatus ? expandedStatus[id] : true}
@@ -145,6 +150,7 @@ export const ObservableTree: React.FC<Props> = ({
             ref={observableNodeSetter}
             key={id}
             data-id={id}
+            className={styles.listItem}
             aria-labelledby={branchId}
           >
             <ListItem id={id} label={label} />
