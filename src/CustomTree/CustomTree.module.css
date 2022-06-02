@@ -6,13 +6,7 @@
   overflow-y: scroll;
 }
 
-.list {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style: none;
-}
-
 .listItem {
+  flex-shrink: 0;
   min-height: var(--blockHeight);
 }
