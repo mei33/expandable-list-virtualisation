@@ -18,16 +18,21 @@ function App() {
 
   const mockData = React.useMemo(() => getMockData(1000), []);
 
+  const innerOffset = 10;
+
   return (
-    <div className="App">
-      <button
-        onClick={handleSwitchTree}
-        style={{ position: 'fixed', top: 50, right: 50 }}
-      >
+    <div
+      className="App"
+      style={{ '--appOffset': `${innerOffset}px` } as React.CSSProperties}
+    >
+      <button onClick={handleSwitchTree} className="Button">
         сменить вид дерева
       </button>
       {treeKind === 'custom' ? (
-        <CustomTree items={mockData} />
+        <CustomTree
+          items={mockData}
+          height={window.innerHeight - innerOffset * 2}
+        />
       ) : (
         <NativeTree items={mockData} />
       )}

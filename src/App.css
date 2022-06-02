@@ -1,3 +1,9 @@
 .App {
-  padding: 10px;
+  padding: var(--appOffset);
+}
+
+.Button {
+  position: fixed;
+  top: 50px;
+  right: 50px;
 }
