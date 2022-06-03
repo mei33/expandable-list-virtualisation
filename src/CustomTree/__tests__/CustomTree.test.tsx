@@ -38,30 +38,30 @@ describe('CustomTree', () => {
     expect(screen.getByText('label-499')).toBeInTheDocument();
   });
 
-  it('отображает все элементы в автоматическом режиме, если их количество не превышает 3 размеров блока', () => {
-    render(<CustomTree items={mockItems.slice(0, 117)} />);
+  it('отображает все элементы в автоматическом режиме, если их количество не превышает 4 высоты блока', () => {
+    render(<CustomTree items={mockItems.slice(0, 156)} />);
 
     expect(screen.getByText('label-0')).toBeInTheDocument();
     expect(screen.getByText('label-100')).toBeInTheDocument();
-    expect(screen.getByText('label-116')).toBeInTheDocument();
+    expect(screen.getByText('label-155')).toBeInTheDocument();
   });
 
-  it('не активирует режим подгрузки, если их количество элементов не превышает 3 высоты блока', () => {
-    render(<CustomTree items={mockItems.slice(0, 117)} />);
+  it('не активирует режим подгрузки, если их количество элементов не превышает 4 высоты блока', () => {
+    render(<CustomTree items={mockItems.slice(0, 156)} />);
 
     expect(observeMock).not.toHaveBeenCalled();
   });
 
-  it('отображает часть элементов в автоматическом режиме, если их количество превышает 3 высоты блока', () => {
+  it('отображает часть элементов в автоматическом режиме, если их количество превышает 4 высоты блока', () => {
     render(<CustomTree items={mockItems} />);
 
     expect(screen.getByText('label-0')).toBeInTheDocument();
     expect(screen.getByText('label-100')).toBeInTheDocument();
-    expect(screen.getByText('label-116')).toBeInTheDocument();
-    expect(screen.queryByText('label-117')).not.toBeInTheDocument();
+    expect(screen.getByText('label-155')).toBeInTheDocument();
+    expect(screen.queryByText('label-156')).not.toBeInTheDocument();
   });
 
-  it('активирует режим подгрузки, если количество элементов превышает 3 высоты блока', () => {
+  it('активирует режим подгрузки, если количество элементов превышает 4 высоты блока', () => {
     render(<CustomTree items={mockItems} />);
 
     expect(observeMock).toHaveBeenCalledTimes(1);
