@@ -126,14 +126,16 @@ export const ObservableTree: React.FC<Props> = ({
     branchId?: Item['id'];
   }) => {
     return items.map(({ id, label, children }) => {
+      const commonAttributes = {
+        'data-id': id,
+        ref: observableNodeSetter,
+        key: id,
+        className: styles.listItem,
+      };
+
       if (children.length) {
         return (
-          <div
-            ref={observableNodeSetter}
-            key={id}
-            data-id={id}
-            className={styles.listItem}
-          >
+          <div {...commonAttributes}>
             <Expandable
               id={id}
               isExpanded={id in expandedStatus ? expandedStatus[id] : true}
@@ -146,13 +148,7 @@ export const ObservableTree: React.FC<Props> = ({
         );
       } else {
         return (
-          <div
-            ref={observableNodeSetter}
-            key={id}
-            data-id={id}
-            className={styles.listItem}
-            aria-labelledby={branchId}
-          >
+          <div {...commonAttributes} aria-labelledby={branchId}>
             <ListItem id={id} label={label} />
           </div>
         );
