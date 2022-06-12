@@ -6,10 +6,8 @@ interface Props {
   label: string;
 }
 
-export const ListItem: React.FC<Props> = ({ className, id, label }) => {
-  return (
-    <div id={id} className={className}>
-      {label}
-    </div>
-  );
-};
+export const ListItem: React.FC<Props> = ({ className, id, label }) => (
+  <div id={id} className={className}>
+    {label}
+  </div>
+);

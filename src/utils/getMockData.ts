@@ -12,12 +12,10 @@ export const getMockData = (objectsOnFirstLevel: number) => {
   for (let i = 0; i < objectsOnFirstLevel; i++) {
     const demoObj = {
       ...getItem(),
-      children: Array.from({ length: 5 }, () => {
-        return {
-          ...getItem(),
-          children: Math.random() > 0.5 ? [] : [getItem()],
-        };
-      }),
+      children: Array.from({ length: 5 }, () => ({
+        ...getItem(),
+        children: Math.random() > 0.5 ? [] : [getItem()],
+      })),
     };
 
     result.push(demoObj);
