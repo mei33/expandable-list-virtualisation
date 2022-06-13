@@ -1,3 +1,7 @@
+.main[open] {
+  margin-bottom: 10px;
+}
+
 .main > .main {
   margin-left: 10px;
 }

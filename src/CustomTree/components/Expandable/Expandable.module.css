@@ -1,3 +1,7 @@
+.main.isExpanded {
+  margin-bottom: 10px;
+}
+
 .main > .main {
   margin-left: 10px;
 }
@@ -11,14 +15,14 @@
   font-size: 16px;
 }
 
-.label::before {
-  margin-right: 5px;
+.label::after {
+  margin-left: 5px;
   width: 15px;
   display: inline-block;
   content: "→";
 }
 
-.label.isExpanded::before {
+.label.isExpanded::after {
   content: "↓";
 }
 
