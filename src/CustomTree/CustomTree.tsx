@@ -10,6 +10,7 @@ interface Props {
   className?: string;
   height?: number;
   items: Item[];
+  isSorted?: boolean;
   mode?: 'full' | 'auto';
   renderBranch?: RenderItemFn;
   renderListItem?: RenderItemFn;
@@ -20,6 +21,7 @@ export interface CommonTreeProps {
   className?: Props['className'];
   height?: Props['height'];
   items: Props['items'];
+  isSorted?: Props['isSorted'];
   renderBranch: Props['renderBranch'];
   renderListItem: Props['renderListItem'];
   onToggle?: Props['onToggle'];
@@ -32,6 +34,7 @@ export const CustomTree: React.FC<Props> = ({
   className,
   height: heightPassed,
   items,
+  isSorted = true,
   mode = 'auto',
   renderBranch,
   renderListItem,
@@ -50,6 +53,7 @@ export const CustomTree: React.FC<Props> = ({
   const commonProps: CommonTreeProps = {
     className,
     items,
+    isSorted,
     renderBranch,
     renderListItem,
     onToggle,

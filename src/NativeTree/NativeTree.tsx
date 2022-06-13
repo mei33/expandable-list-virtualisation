@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { Item, RenderItemFn } from '../types';
+import { getSortedItems } from '../utils/getSortedItems';
+
 import { Expandable } from './components/Expandable';
 import { ListItem } from './components/ListItem';
 
@@ -9,6 +11,7 @@ import styles from './NativeTree.module.css';
 interface Props {
   className?: string;
   items: Item[];
+  isSorted?: boolean;
   renderBranch?: RenderItemFn;
   renderListItem?: RenderItemFn;
   onToggle?(id: Item['id']): void;
@@ -17,6 +20,7 @@ interface Props {
 export const NativeTree: React.FC<Props> = ({
   className,
   items,
+  isSorted = true,
   renderBranch,
   renderListItem,
   onToggle,
@@ -28,7 +32,7 @@ export const NativeTree: React.FC<Props> = ({
   };
 
   if (!items.length) {
-    return null
+    return null;
   }
 
   const renderTreeContent = ({
@@ -45,6 +49,8 @@ export const NativeTree: React.FC<Props> = ({
         let listItem;
 
         if (children.length) {
+          const nestedItems = isSorted ? getSortedItems(children) : children;
+
           listItem = (
             <Expandable
               id={id}
@@ -53,7 +59,7 @@ export const NativeTree: React.FC<Props> = ({
               renderTitle={renderBranch}
             >
               {renderTreeContent({
-                items: children,
+                items: nestedItems,
                 branchLabel,
                 branchId: id,
               })}

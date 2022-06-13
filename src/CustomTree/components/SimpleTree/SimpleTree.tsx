@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Item } from '../../../types';
+import { getSortedItems } from '../../../utils/getSortedItems';
 import { CommonTreeProps } from '../../CustomTree';
 import { ListItem } from '../ListItem';
 import { Expandable } from '../Expandable';
@@ -10,6 +11,7 @@ import styles from '../../CustomTree.module.css';
 export const SimpleTree: React.FC<CommonTreeProps> = ({
   className,
   items,
+  isSorted,
   renderBranch,
   renderListItem,
   onToggle,
@@ -44,6 +46,8 @@ export const SimpleTree: React.FC<CommonTreeProps> = ({
   }) => {
     return items.map(({ id, label, children }) => {
       if (children.length) {
+        const nestedItems = isSorted ? getSortedItems(children) : children;
+
         return (
           <div key={id}>
             <Expandable
@@ -53,7 +57,7 @@ export const SimpleTree: React.FC<CommonTreeProps> = ({
               renderTitle={renderBranch}
               onClick={handleClick}
             >
-              {renderTreeContent({ items: children, branchId: id })}
+              {renderTreeContent({ items: nestedItems, branchId: id })}
             </Expandable>
           </div>
         );

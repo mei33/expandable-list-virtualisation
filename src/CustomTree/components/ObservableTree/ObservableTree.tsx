@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Item } from '../../../types';
+import { getSortedItems } from '../../../utils/getSortedItems';
 import {
   CommonTreeProps,
   INITIAL_BLOCK_HEIGHT,
@@ -21,6 +22,7 @@ export const ObservableTree: React.FC<Props> = ({
   className,
   height,
   items,
+  isSorted,
   onToggle,
 }) => {
   const [expandedStatus, setExpandedStatus] = React.useState<
@@ -134,6 +136,8 @@ export const ObservableTree: React.FC<Props> = ({
       };
 
       if (children.length) {
+        const nestedItems = isSorted ? getSortedItems(children) : children;
+
         return (
           <div {...commonAttributes}>
             <Expandable
@@ -142,7 +146,7 @@ export const ObservableTree: React.FC<Props> = ({
               label={label}
               onClick={handleClick}
             >
-              {renderTreeContent({ items: children, branchId: id })}
+              {renderTreeContent({ items: nestedItems, branchId: id })}
             </Expandable>
           </div>
         );
