@@ -7,12 +7,14 @@
 }
 
 .label {
+  width: 100%;
   padding-left: 0;
   padding-right: 0;
   cursor: pointer;
   border: none;
   background: transparent;
   font-size: 16px;
+  text-align: left;
 }
 
 .label::after {
@@ -26,6 +28,10 @@
   content: "↓";
 }
 
+.label:focus, .label:focus + * {
+  background: aliceblue;
+}
+
 .content {
-  margin-left: 20px;
+  padding-left: 20px;
 }

@@ -8,6 +8,7 @@ import {
   SCREENS_TO_RENDER,
 } from '../../CustomTree';
 import { useObservable } from '../../hooks/useObservable';
+import { useKeyboardNavigation } from '../../hooks/useKeyboardNavigation';
 import { getMaxItemsVisibleOnScreen } from '../../utils/getMaxItemsVisibleOnScreen';
 import { Expandable } from '../Expandable';
 import { ListItem } from '../ListItem';
@@ -25,6 +26,8 @@ export const ObservableTree: React.FC<Props> = ({
   isSorted,
   onToggle,
 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+
   const [expandedStatus, setExpandedStatus] = React.useState<
     Record<Item['id'], boolean>
   >({});
@@ -79,6 +82,13 @@ export const ObservableTree: React.FC<Props> = ({
     itemsAmountToRender,
     setItemsToRender,
     screensToRender: SCREENS_TO_RENDER,
+  });
+
+  useKeyboardNavigation({
+    containerRef: ref,
+    onToggle: (id, isExpanded) => {
+      setExpandedStatus({ ...expandedStatus, [id]: isExpanded });
+    },
   });
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -162,6 +172,7 @@ export const ObservableTree: React.FC<Props> = ({
 
   return (
     <div
+      ref={ref}
       className={`${styles.main} ${className ?? ''}`}
       style={
         {

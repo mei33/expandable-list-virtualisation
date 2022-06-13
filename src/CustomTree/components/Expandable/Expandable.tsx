@@ -21,10 +21,7 @@ export const Expandable: React.FC<Props> = ({
   renderTitle,
   onClick,
 }) => (
-  <div
-    className={`${styles.main} ${isExpanded ? styles.isExpanded : ''}`}
-    tabIndex={0}
-  >
+  <div className={`${styles.main} ${isExpanded ? styles.isExpanded : ''}`}>
     <button
       id={id}
       className={`${styles.label} ${isExpanded ? styles.isExpanded : ''}`}
