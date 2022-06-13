@@ -18,27 +18,27 @@ describe('CustomTree', () => {
       writable: true,
       configurable: true,
       value: IntersectionObserverMock,
-    })
-    
+    });
+
     Object.defineProperty(global, 'IntersectionObserver', {
       writable: true,
       configurable: true,
       value: IntersectionObserverMock,
-    })
+    });
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('показывает полный список в полном режиме', () => {
+  it('shows full list in full mode', () => {
     render(<CustomTree items={mockItems} mode="full" />);
 
     expect(screen.getByText('label-0')).toBeInTheDocument();
     expect(screen.getByText('label-499')).toBeInTheDocument();
   });
 
-  it('отображает все элементы в автоматическом режиме, если их количество не превышает 4 высоты блока', () => {
+  it('shows all elements in auto mode if their quantity is no more than 4 block heights', () => {
     render(<CustomTree items={mockItems.slice(0, 156)} />);
 
     expect(screen.getByText('label-0')).toBeInTheDocument();
@@ -46,13 +46,13 @@ describe('CustomTree', () => {
     expect(screen.getByText('label-155')).toBeInTheDocument();
   });
 
-  it('не активирует режим подгрузки, если их количество элементов не превышает 4 высоты блока', () => {
+  it('does not activate preloading mode if items quantity is no more than 4 block heights', () => {
     render(<CustomTree items={mockItems.slice(0, 156)} />);
 
     expect(observeMock).not.toHaveBeenCalled();
   });
 
-  it('отображает часть элементов в автоматическом режиме, если их количество превышает 4 высоты блока', () => {
+  it('shows part of items in auto mode if their amount is more than 4 block heights', () => {
     render(<CustomTree items={mockItems} />);
 
     expect(screen.getByText('label-0')).toBeInTheDocument();
@@ -61,13 +61,13 @@ describe('CustomTree', () => {
     expect(screen.queryByText('label-156')).not.toBeInTheDocument();
   });
 
-  it('активирует режим подгрузки, если количество элементов превышает 4 высоты блока', () => {
+  it('activates preloading mode if number of elements is more than 4 block heights', () => {
     render(<CustomTree items={mockItems} />);
 
     expect(observeMock).toHaveBeenCalledTimes(1);
   });
 
-  it('раскрывает и закрывает вложенные элементы по клику, запоминая статус вложенности', () => {
+  it('toggles nested elements by click, remembering status of nested items', () => {
     render(
       <CustomTree
         items={[
@@ -90,7 +90,7 @@ describe('CustomTree', () => {
     const expandable = screen.getByText('label-0');
 
     if (!expandable) {
-      throw new Error('Элемент не найден');
+      throw new Error('Element is not found');
     }
 
     expect(screen.getByText('nested')).toBeInTheDocument();
@@ -118,7 +118,7 @@ describe('CustomTree', () => {
     expect(screen.queryByText('super-nested')).not.toBeInTheDocument();
   });
 
-  it('вызывает внешние обработчики изменения состояния элементов', () => {
+  it('calls outer handlers on changing items state', () => {
     const mockedOnToggle = jest.fn();
 
     render(
@@ -136,7 +136,7 @@ describe('CustomTree', () => {
     const expandable = screen.getByText('label-0');
 
     if (!expandable) {
-      throw new Error('Элемент не найден');
+      throw new Error('Element is not found');
     }
 
     fireEvent.click(expandable);
@@ -144,7 +144,7 @@ describe('CustomTree', () => {
     expect(mockedOnToggle).nthCalledWith(1, { id: '0', isExpanded: false });
   });
 
-  it('принимает переданные CSS-классы для короткого списка', () => {
+  it('uses given CSS-classes for short list', () => {
     const className = 'some-class';
     const { container } = render(
       <CustomTree items={mockItems.slice(0, 114)} className={className} />
@@ -153,7 +153,7 @@ describe('CustomTree', () => {
     expect(container.getElementsByClassName(className).length).toBe(1);
   });
 
-  it('принимает переданные CSS-классы для длинного списка', () => {
+  it('uses given CSS-classes for long list', () => {
     const className = 'some-class';
     const { container } = render(
       <CustomTree items={mockItems} className={className} />
@@ -162,13 +162,13 @@ describe('CustomTree', () => {
     expect(container.getElementsByClassName(className).length).toBe(1);
   });
 
-  it('может принимать пустой список', () => {
+  it('can handle empty list', () => {
     const { container } = render(<CustomTree items={[]} />);
 
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('предоставляет возможность использовать заданные пользователем рендер-функции', () => {
+  it('allows to use given render-functions', () => {
     render(
       <CustomTree
         renderBranch={({ id, label }) => `+++${id}+++ ---${label}---`}

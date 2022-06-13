@@ -26,7 +26,7 @@ function App() {
       style={{ '--appOffset': `${innerOffset}px` } as React.CSSProperties}
     >
       <button onClick={handleSwitchTree} className="Button">
-        сменить вид дерева
+        change tree type
       </button>
       {treeKind === 'custom' ? (
         <CustomTree

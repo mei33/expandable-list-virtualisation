@@ -38,7 +38,7 @@ export const useObservable = ({
 }: Params) => {
   const itemsBeforeTopObservable = itemsOnScreen * 2;
 
-  // движение вниз
+  // scroll down
   React.useLayoutEffect(() => {
     observerRefBottom.current = new IntersectionObserver(
       (entries) => {
@@ -117,7 +117,7 @@ export const useObservable = ({
     setItemsToRender,
   ]);
 
-  // движение вверх
+  // scroll up
   React.useLayoutEffect(() => {
     observerRefTop.current = new IntersectionObserver(
       (entries) => {

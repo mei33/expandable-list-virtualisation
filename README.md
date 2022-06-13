@@ -1,34 +1,36 @@
-# Просмотрщик вложенных списков
+# Virtualization of nested lists on React
 
-Проект собран на базе CRA и имеет привычные команды:
-* `yarn start` для запуска главной страницы (можно нажимать, там уже всё готово)
-* `yarn test` для запуска тестов (они есть, ура!)
-* `yarn build` для билда приложения
-* `yarn eject` для нескучного вечера
-* `yarn storybook` чтобы потыкать пропсы
+Project is based on create-react-app and has usual commands: 
+* `yarn start` for running main page (you can click here, everything is settled)
+* `yarn test` for running tests (we have them, hooray!)
+* `yarn build` for building app, of course
+* `yarn eject` for exciting evening
+* `yarn storybook` if you want to poke some props 
 
-## Что внутри
+## What's inside
 
-Два компонента - CustomTree и NativeTree, реализующие логику просмотра списка вложенных объектов. Оба предоставляют функционал стилизации родительских и дочерних элементов, а так же сами дочерние элементы (в случае, если нет желания передавать собственные компоненты в рендер-функции), готовые для стилизации через CSS.
+There are two components - CustomTree и NativeTree, which implement logic of viewing list of nested object. Both of them offer functionality for styling parent and child elements, and also child elements themselves (in case if there is no necessity to pass your own components to render functions) ready to be styled via CSS.
 
 ### CustomTree
 
-Компонент, максимально точно реализующий ТЗ путём рендера на странице только части элементов, достаточных для отображения на нескольких экранах. При скролле вниз-вверх "догружает" недостающие элементы. "Запоминает" состояние для вложенных элементов.
-В зависимости от желания пользователя также может быть переведен в режим принудительного отображения всех элементов.
+Component, which as accurately as possible implements idea of virtualization by rendering on page only those items which are enough for displaying on several screens. On scroll down or up it "loads" missing items. It "remembers" state for nested elements.
+Depending on the user's intentions it also can be switched to "forced" mode to show all items.
 
 ### NativeTree
 
-Компонент, реализующий "идеальную" accessibility-friendly разметку, предполагающую использование соответствующих html-тегов и их нативного браузерного поведения. Отображает все переданные элементы. 
+Component, which implements "perfect" accessibility-friendly markup, assuming use of appropriate html tags and their native browser behavior. Shows all given items. 
 
-## Точки роста
-* ~~добавить сторибук~~
-* добавить более детальные тесты для подгрузки элементов на скролл (текущий мок IntersectionObserver не слишком гибок для этого)
-* обрабатывать элементы списка с кастомной высотой
-* подумать над выносом общей логики между компонентами (уменьшит читаемость, но повысит поддерживаемость)
-* подумать над минимизацией ререндеров элеметов (React.memo по понятным причинам сломает вложенные списки)
-* вывести как отдельную библиотеку, предоставляющую компоненты
-* подумать над стабильностью при экстремально быстром скролле
-* перевести на английский
-* сделать более явные оступы (и вертикальные, и горизонтальные)
-* выделить родительские элементы
-* добавить сортировку по наличию вложенных элементов
+## Points of growth
+* ~~add storybook~~
+* ~~rewrite everuthing in english~~
+* ~~use bigger offsets~~
+* ~~add sorting by "expandable" status~~
+* think about moving common logic out of components (it will decrease readability, but increase supportability)
+* think about minimisation or rerenders (React.memo for obvious reasons does not work for children lists)
+* handle list items with custom height
+* add more detailed tests for preloading on scrolling (IntersectionObserver mock is not that flexible for it)
+* reorganize as separate library with exportable components
+* add more stability on extremely fast scrolling
+
+### How it was made
+[Here]() you can read about my intentions and whole process. Feel free to discuss.

@@ -5,14 +5,14 @@ import { NativeTree } from '../NativeTree';
 import { mockItems } from '../../mocks/mock';
 
 describe('NativeTree', () => {
-  it('показывает полный список', () => {
+  it('shows full list', () => {
     render(<NativeTree items={mockItems} />);
 
     expect(screen.getByText('label-0')).toBeInTheDocument();
     expect(screen.getByText('label-499')).toBeInTheDocument();
   });
 
-  it('раскрывает и закрывает вложенные элементы по клику', () => {
+  it('toggles nested elements by click', () => {
     render(
       <NativeTree
         items={[
@@ -28,7 +28,7 @@ describe('NativeTree', () => {
     const nested = screen.getByText('nested');
 
     if (!expandable) {
-      throw new Error('Элемент не найден');
+      throw new Error('Element is not found');
     }
 
     expect(nested).not.toBeVisible();
@@ -38,7 +38,7 @@ describe('NativeTree', () => {
     expect(nested).toBeVisible();
   });
 
-  it('вызывает внешние обработчики изменения состояния элементов', () => {
+  it('calls outer handlers on changing items state', () => {
     const mockedOnToggle = jest.fn();
 
     render(
@@ -56,7 +56,7 @@ describe('NativeTree', () => {
     const expandable = screen.getByText('label-0');
 
     if (!expandable) {
-      throw new Error('Элемент не найден');
+      throw new Error('Element is not found');
     }
 
     fireEvent.click(expandable);
@@ -64,7 +64,7 @@ describe('NativeTree', () => {
     expect(mockedOnToggle).nthCalledWith(1, '0');
   });
 
-  it('принимает переданные CSS-классы', () => {
+  it('uses given CSS-classes', () => {
     const className = 'some-class';
     const { container } = render(
       <NativeTree items={mockItems} className={className} />
@@ -73,13 +73,13 @@ describe('NativeTree', () => {
     expect(container.getElementsByClassName(className).length).toBe(1);
   });
 
-  it('может принимать пустой список', () => {
+  it('can handle empty list', () => {
     const { container } = render(<NativeTree items={[]} />);
 
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('предоставляет возможность использовать заданные пользователем рендер-функции', () => {
+  it('allows to use given render-functions', () => {
     render(
       <NativeTree
         renderBranch={({ id, label }) => `+++${id}+++ ---${label}---`}
