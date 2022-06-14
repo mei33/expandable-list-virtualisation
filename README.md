@@ -33,4 +33,4 @@ Component, which implements "perfect" accessibility-friendly markup, assuming us
 * add more stability on extremely fast scrolling
 
 ### How it was made
-[Here]() you can read about my intentions and whole process. Feel free to discuss.
+[Here](https://medium.com/@mei33.pw/list-virtualization-on-react-bc583db6951f) you can read about my intentions and whole process. Feel free to discuss.
