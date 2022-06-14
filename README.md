@@ -1,4 +1,4 @@
-# Virtualization of nested lists on React
+# Virtualization of nested lists with React
 
 Project is based on create-react-app and has usual commands: 
 * `yarn start` for running main page (you can click here, everything is settled)
